@@ -31,6 +31,10 @@ public class PropostaRequest {
         this.salario = salario;
     }
 
+    public String getCpfOrCnpj() {
+        return cpfOrCnpj;
+    }
+
     public Proposta toModel() {
         return new Proposta(this.cpfOrCnpj, this.nome, this.email, this.endereco, this.salario);
     }
