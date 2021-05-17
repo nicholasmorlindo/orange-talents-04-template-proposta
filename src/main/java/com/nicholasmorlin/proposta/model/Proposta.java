@@ -1,5 +1,7 @@
 package com.nicholasmorlin.proposta.model;
 
+import com.nicholasmorlin.proposta.controller.response.Status;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 
@@ -16,6 +18,9 @@ public class Proposta {
     private String email;
     private String endereco;
     private BigDecimal salario;
+
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
     public Proposta(){
     }
@@ -50,5 +55,9 @@ public class Proposta {
 
     public BigDecimal getSalario() {
         return salario;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }

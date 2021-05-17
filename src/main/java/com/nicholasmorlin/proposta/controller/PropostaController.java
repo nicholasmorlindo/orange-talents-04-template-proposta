@@ -1,10 +1,15 @@
 package com.nicholasmorlin.proposta.controller;
 
+import com.nicholasmorlin.proposta.controller.client.AnaliseFinanceiraClient;
 import com.nicholasmorlin.proposta.controller.exception.ApiErroException;
+import com.nicholasmorlin.proposta.controller.request.AnalisePropostaRequest;
+import com.nicholasmorlin.proposta.controller.response.AnalisePropostaResponse;
 import com.nicholasmorlin.proposta.controller.response.PropostaResponse;
+import com.nicholasmorlin.proposta.controller.response.Status;
 import com.nicholasmorlin.proposta.model.Proposta;
 import com.nicholasmorlin.proposta.controller.request.PropostaRequest;
 import com.nicholasmorlin.proposta.repository.PropostaRepository;
+import feign.FeignException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -19,8 +24,12 @@ public class PropostaController {
     @Autowired
     private final PropostaRepository propostaRepository;
 
-    public PropostaController(PropostaRepository propostaRepository) {
+    @Autowired
+    private final AnaliseFinanceiraClient analiseFinanceiraClient;
+
+    public PropostaController(PropostaRepository propostaRepository, AnaliseFinanceiraClient analiseFinanceiraClient) {
         this.propostaRepository = propostaRepository;
+        this.analiseFinanceiraClient = analiseFinanceiraClient;
     }
 
     @PostMapping
@@ -35,6 +44,22 @@ public class PropostaController {
         } else {
             Proposta proposta = propostaRequest.toModel();
             propostaRepository.save(proposta);
+
+            try {
+                AnalisePropostaRequest analisaPropostaRequest = new AnalisePropostaRequest(proposta.getCpfOrCnpj(),
+                                                                                            proposta.getNome(),
+                                                                                            proposta.getId()
+                                                                                            );
+
+                AnalisePropostaResponse resultadoConsulta = analiseFinanceiraClient.consultar(analisaPropostaRequest);
+                Status status = resultadoConsulta.status();
+                proposta.setStatus(status);
+
+            } catch (FeignException.UnprocessableEntity unprocessableEntity) {
+                proposta.setStatus(Status.NAO_ELEGIVEL);
+            }
+            propostaRepository.save(proposta);
+
             return PropostaResponse.toResponse(proposta);
         }
     }
