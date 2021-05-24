@@ -32,6 +32,21 @@ public class PropostaController {
         this.analiseFinanceiraClient = analiseFinanceiraClient;
     }
 
+    @GetMapping(value = "/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public PropostaResponse consultarProposta(@PathVariable Long id) {
+
+        Optional<Proposta> proposta = propostaRepository.findById(id);
+
+        if (proposta.isPresent()) {
+            return PropostaResponse.toResponse(proposta.get());
+        }
+
+        throw new ApiErroException(HttpStatus.NOT_FOUND, "Proposta não encontrada");
+    }
+
+
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public PropostaResponse cadastrarProposta(@RequestBody @Valid PropostaRequest propostaRequest){

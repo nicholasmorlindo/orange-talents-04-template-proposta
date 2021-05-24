@@ -12,14 +12,16 @@ public class PropostaResponse {
     private String email;
     private String endereco;
     private BigDecimal salario;
+    private Status status;
 
-    public PropostaResponse(Long id, String cpfOrCnpj, String nome, String email, String endereco, BigDecimal salario) {
+    public PropostaResponse(Long id, String cpfOrCnpj, String nome, String email, String endereco, BigDecimal salario, Status status) {
         this.id = id;
         this.cpfOrCnpj = cpfOrCnpj;
         this.nome = nome;
         this.email = email;
         this.endereco = endereco;
         this.salario = salario;
+        this.status = status;
     }
 
     public Long getId() {
@@ -46,6 +48,10 @@ public class PropostaResponse {
         return salario;
     }
 
+    public Status getStatus() {
+        return status;
+    }
+
     public static PropostaResponse toResponse(Proposta proposta) {
         return new PropostaResponse(
                 proposta.getId(),
@@ -53,7 +59,8 @@ public class PropostaResponse {
                 proposta.getNome(),
                 proposta.getEmail(),
                 proposta.getEndereco(),
-                proposta.getSalario()
+                proposta.getSalario(),
+                proposta.getStatus()
         );
     }
 
