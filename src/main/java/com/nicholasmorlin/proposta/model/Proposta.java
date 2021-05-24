@@ -22,6 +22,9 @@ public class Proposta {
     @Enumerated(EnumType.STRING)
     private Status status;
 
+    @OneToOne
+    private Cartao cartao;
+
     public Proposta(){
     }
 
@@ -59,5 +62,9 @@ public class Proposta {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public void setCartao(Cartao cartao) {
+        this.cartao = cartao;
     }
 }
