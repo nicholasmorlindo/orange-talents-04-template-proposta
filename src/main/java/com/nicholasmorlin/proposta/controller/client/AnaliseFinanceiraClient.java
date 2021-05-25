@@ -6,7 +6,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(name = "analiseFinanceira", url = "http://localhost:9999", configuration = SimpleFeignConfiguration.class)
+@FeignClient(name = "analiseFinanceira", url = "${ANALISECARTAO_API_URL}", configuration = SimpleFeignConfiguration.class)
 public interface AnaliseFinanceiraClient {
 
     @PostMapping("/api/solicitacao")
