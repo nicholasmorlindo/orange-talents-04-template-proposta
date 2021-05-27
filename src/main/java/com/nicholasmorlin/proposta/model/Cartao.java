@@ -3,6 +3,7 @@ package com.nicholasmorlin.proposta.model;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "cartoes")
@@ -18,6 +19,9 @@ public class Cartao {
     private String titular;
     private BigDecimal limite;
     private String idProposta;
+
+    @OneToMany(mappedBy = "cartao")
+    private List<Biometria> biometrias;
 
     @Deprecated
     public Cartao(){
