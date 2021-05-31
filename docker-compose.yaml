@@ -9,12 +9,15 @@ services:
       - db_mysql
       - analise
       - contas
+      - keycloak
     environment:
       - DATABASE_URL=jdbc:mysql://db_mysql:3306/orange_proposta
       - DATABASE_USERNAME=root
       - DATABASE_PASSWORD=root
       - ANALISECARTAO_API_URL=http://analise:9999
       - ASSOCIARCONTAS_API_URL=http://contas:8888
+      - KEYCLOAK_ISSUER_URI=http://keycloak:8080/auth/realms/orange-talents
+      - KEYCLOAK_JWK_URI=http://keycloak:8080/auth/realms/orange-talents/protocol/openid-connect/certs
 
   db_mysql:
     image: mysql:latest
@@ -76,6 +79,7 @@ services:
       - transacoes
       - postgres
     environment:
+      KEYCLOAK_FRONTEND_URL: http://keycloak:8080/auth
       DB_VENDOR: postgres
       DB_ADDR: postgres
       DB_PORT: 5432
