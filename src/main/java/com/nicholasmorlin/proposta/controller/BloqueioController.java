@@ -32,9 +32,10 @@ public class BloqueioController {
     public BloqueioResponse bloquearCartao(@PathVariable Long id, HttpServletRequest httpServletRequest){
 
         Optional<Cartao> cartao = cartaoRepository.findById(id);
+        Optional<Bloqueio> verificaBloqueio = bloqueioRepository.findByCartaoBloqueio(id);
 
         if (cartao.isPresent()) {
-            if (cartao.get().getBloqueio() == null) {
+            if (verificaBloqueio.isEmpty()) {
 
 
                 Bloqueio bloqueio = new Bloqueio(httpServletRequest.getRemoteAddr(),
