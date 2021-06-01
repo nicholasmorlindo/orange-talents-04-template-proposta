@@ -23,6 +23,9 @@ public class Cartao {
     @OneToMany(mappedBy = "cartao")
     private List<Biometria> biometrias;
 
+    @OneToOne(mappedBy = "cartao")
+    private Bloqueio bloqueio;
+
     @Deprecated
     public Cartao(){
     }
@@ -57,5 +60,13 @@ public class Cartao {
 
     public String getIdProposta() {
         return idProposta;
+    }
+
+    public Bloqueio getBloqueio() {
+        return bloqueio;
+    }
+
+    public void setBloqueio(Long id) {
+        this.bloqueio = bloqueio;
     }
 }

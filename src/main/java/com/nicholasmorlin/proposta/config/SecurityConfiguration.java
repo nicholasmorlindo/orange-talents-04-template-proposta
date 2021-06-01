@@ -14,10 +14,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        System.out.println("Entrou aqui");
         http.authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/api/propostas/**").hasAnyAuthority("SCOPE_orange-talents-scope:write")
                 .antMatchers(HttpMethod.GET, "/api/propostas/**").hasAnyAuthority("SCOPE_orange-talents-scope:read")
+                .antMatchers(HttpMethod.POST,"/api/bloqueios/**").hasAnyAuthority("SCOPE_orange-talents-scope:write")
                 .anyRequest().authenticated()
                 .and()
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);
