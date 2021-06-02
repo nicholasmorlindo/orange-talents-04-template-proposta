@@ -1,5 +1,6 @@
 package com.nicholasmorlin.proposta.model;
 
+import com.nicholasmorlin.proposta.controller.response.StatusAviso;
 import com.nicholasmorlin.proposta.controller.response.StatusCartao;
 
 import javax.persistence.*;
@@ -30,6 +31,9 @@ public class Cartao {
 
     @Enumerated(value = EnumType.STRING)
     private StatusCartao statusCartao = StatusCartao.ATIVO;
+
+    @Enumerated(value = EnumType.STRING)
+    private StatusAviso statusAviso = null;
 
     @Deprecated
     public Cartao(){
@@ -75,7 +79,15 @@ public class Cartao {
         return statusCartao;
     }
 
+    public StatusAviso getStatusAviso() {
+        return statusAviso;
+    }
+
     public void setStatusCartao(StatusCartao statusCartao) {
         this.statusCartao = StatusCartao.BLOQUEADO;
+    }
+
+    public void setStatusAviso(StatusAviso statusAviso) {
+        this.statusAviso = statusAviso;
     }
 }
