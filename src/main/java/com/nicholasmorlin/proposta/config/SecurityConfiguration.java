@@ -15,6 +15,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                .antMatchers(HttpMethod.GET, "/actuator/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/propostas/**").hasAnyAuthority("SCOPE_orange-talents-scope:write")
                 .antMatchers(HttpMethod.GET, "/api/propostas/**").hasAnyAuthority("SCOPE_orange-talents-scope:read")
                 .antMatchers(HttpMethod.POST,"/api/bloqueios/**").hasAnyAuthority("SCOPE_orange-talents-scope:write")
