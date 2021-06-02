@@ -1,11 +1,6 @@
 package com.nicholasmorlin.proposta.controller.response;
 
 import com.nicholasmorlin.proposta.model.Bloqueio;
-import com.nicholasmorlin.proposta.model.Cartao;
-
-import javax.persistence.*;
-import javax.validation.constraints.FutureOrPresent;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 public class BloqueioResponse {

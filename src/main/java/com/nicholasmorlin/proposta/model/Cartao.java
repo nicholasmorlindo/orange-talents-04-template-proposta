@@ -1,5 +1,7 @@
 package com.nicholasmorlin.proposta.model;
 
+import com.nicholasmorlin.proposta.controller.response.StatusCartao;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -25,6 +27,9 @@ public class Cartao {
 
     @OneToOne(mappedBy = "cartao")
     private Bloqueio bloqueio;
+
+    @Enumerated(value = EnumType.STRING)
+    private StatusCartao statusCartao = StatusCartao.ATIVO;
 
     @Deprecated
     public Cartao(){
@@ -66,7 +71,11 @@ public class Cartao {
         return bloqueio;
     }
 
-    public void setBloqueio(Long id) {
-        this.bloqueio = bloqueio;
+    public StatusCartao getStatusCartao() {
+        return statusCartao;
+    }
+
+    public void setStatusCartao(StatusCartao statusCartao) {
+        this.statusCartao = StatusCartao.BLOQUEADO;
     }
 }
