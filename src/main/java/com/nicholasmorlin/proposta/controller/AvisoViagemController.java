@@ -4,16 +4,13 @@ import com.nicholasmorlin.proposta.controller.client.AnaliseCartoesClient;
 import com.nicholasmorlin.proposta.controller.exception.ApiErroException;
 import com.nicholasmorlin.proposta.controller.request.AvisoCartaoRequest;
 import com.nicholasmorlin.proposta.controller.request.AvisoViagemRequest;
-import com.nicholasmorlin.proposta.controller.request.BloqueioCartaoRequest;
 import com.nicholasmorlin.proposta.controller.response.AvisoCartaoResponse;
 import com.nicholasmorlin.proposta.controller.response.AvisoViagemResponse;
-import com.nicholasmorlin.proposta.controller.response.BloqueioCartaoResponse;
 import com.nicholasmorlin.proposta.model.AvisoViagem;
 import com.nicholasmorlin.proposta.model.Cartao;
 import com.nicholasmorlin.proposta.repository.AvisoViagemRepository;
 import com.nicholasmorlin.proposta.repository.CartaoRepository;
 import feign.FeignException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 

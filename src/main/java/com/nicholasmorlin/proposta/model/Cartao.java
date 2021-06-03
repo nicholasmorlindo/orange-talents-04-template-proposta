@@ -2,6 +2,7 @@ package com.nicholasmorlin.proposta.model;
 
 import com.nicholasmorlin.proposta.controller.response.StatusAviso;
 import com.nicholasmorlin.proposta.controller.response.StatusCartao;
+import com.nicholasmorlin.proposta.controller.response.StatusCarteira;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -34,6 +35,12 @@ public class Cartao {
 
     @Enumerated(value = EnumType.STRING)
     private StatusAviso statusAviso = null;
+
+    @OneToMany(mappedBy = "cartao")
+    private List<Carteira> carteiras;
+
+    @Enumerated(value = EnumType.STRING)
+    private StatusCarteira statusCarteira = StatusCarteira.NAO_ASSOCIADA;
 
     @Deprecated
     public Cartao(){
@@ -83,11 +90,19 @@ public class Cartao {
         return statusAviso;
     }
 
+    public StatusCarteira getStatusCarteira() {
+        return statusCarteira;
+    }
+
     public void setStatusCartao(StatusCartao statusCartao) {
         this.statusCartao = StatusCartao.BLOQUEADO;
     }
 
     public void setStatusAviso(StatusAviso statusAviso) {
         this.statusAviso = statusAviso;
+    }
+
+    public void setStatusCarteira(StatusCarteira statusCarteira) {
+        this.statusCarteira = statusCarteira;
     }
 }
