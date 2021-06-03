@@ -10,6 +10,7 @@ services:
       - analise
       - contas
       - keycloak
+      - prometheus
     environment:
       - DATABASE_URL=jdbc:mysql://db_mysql:3306/orange_proposta
       - DATABASE_USERNAME=root
@@ -138,7 +139,8 @@ services:
   prometheus:
     image: prom/prometheus
     volumes:
-     - prometheus-volume:/etc/prometheus/
+      - ./prometheus.yml:/etc/prometheus/prometheus.yaml
+      - prometheus-volume:/etc/prometheus/
     network_mode: bridge
     ports:
       - "9090:9090"
