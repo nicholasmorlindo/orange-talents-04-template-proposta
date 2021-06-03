@@ -2,5 +2,6 @@ package com.nicholasmorlin.proposta.controller.response;
 
 public enum TipoCarteira {
 
-    PAYPAL
+    PAYPAL,
+    SAMSUNG_PAY
 }
